@@ -1,0 +1,11 @@
+# Dependências do Livro: O B-A-BA da Ciência de Dados
+numpy>=1.24.0
+pandas>=2.0.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+scikit-learn>=1.3.0
+scipy>=1.10.0
+statsmodels>=0.14.0
+torch>=2.0.0
+groq>=0.4.0
+pycaret>=3.0.0
