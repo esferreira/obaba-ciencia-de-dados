@@ -7,9 +7,7 @@
 # Execute este arquivo localmente no VS Code ou copie para o Google Colab.
 # ==============================================================================
 
-# ----------------------------------------------------------------------------
-# PRÓXIMO BLOCO DE CÓDIGO DO CAPÍTULO
-# ----------------------------------------------------------------------------# Para instalar no seu ambiente: pip install pycaret
+# Para instalar no seu ambiente: pip install pycaret
 import pandas as pd
 from pycaret.datasets import get_data
 from pycaret.classification import setup, compare_models, tune_model, plot_model, predict_model

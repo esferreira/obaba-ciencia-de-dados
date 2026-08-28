@@ -7,9 +7,7 @@
 # Execute este arquivo localmente no VS Code ou copie para o Google Colab.
 # ==============================================================================
 
-# ----------------------------------------------------------------------------
-# PRÓXIMO BLOCO DE CÓDIGO DO CAPÍTULO
-# ----------------------------------------------------------------------------import os
+import os
 import json
 from groq import Groq
 

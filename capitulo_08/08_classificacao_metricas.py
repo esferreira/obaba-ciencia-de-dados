@@ -7,9 +7,7 @@
 # Execute este arquivo localmente no VS Code ou copie para o Google Colab.
 # ==============================================================================
 
-# ----------------------------------------------------------------------------
-# PRÓXIMO BLOCO DE CÓDIGO DO CAPÍTULO
-# ----------------------------------------------------------------------------import numpy as np
+import numpy as np
 import pandas as pd
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val_score

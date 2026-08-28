@@ -7,9 +7,7 @@
 # Execute este arquivo localmente no VS Code ou copie para o Google Colab.
 # ==============================================================================
 
-# ----------------------------------------------------------------------------
-# PRÓXIMO BLOCO DE CÓDIGO DO CAPÍTULO
-# ----------------------------------------------------------------------------import pandas as pd
+import pandas as pd
 import numpy as np
 
 # Criando um DataFrame de exemplo simulando transações bancárias
@@ -35,6 +33,10 @@ df.info()
 print("\n--- Estatísticas Descritivas dos Dados Numéricos ---")
 print(df.describe())
 
+# ----------------------------------------------------------------------------
+# PRÓXIMO BLOCO DE CÓDIGO DO CAPÍTULO
+# ----------------------------------------------------------------------------
+
 # Selecionando apenas clientes com renda acima de R$ 5.000
 clientes_alta_renda = df[df["renda"] > 5000]
 
@@ -45,8 +47,16 @@ sp_inadimplentes = df[(df["cidade"] == "São Paulo") & (df["inadimplente"] == 1)
 # Selecionando colunas específicas usando .loc (por nome) ou .iloc (por índice numérico)
 apenas_contato = df.loc[:, ["cliente_id", "cidade", "renda"]]
 
+# ----------------------------------------------------------------------------
+# PRÓXIMO BLOCO DE CÓDIGO DO CAPÍTULO
+# ----------------------------------------------------------------------------
+
 # Remove registros idênticos repetidos
 df = df.drop_duplicates()
+
+# ----------------------------------------------------------------------------
+# PRÓXIMO BLOCO DE CÓDIGO DO CAPÍTULO
+# ----------------------------------------------------------------------------
 
 # Verificando quantos nulos existem por coluna
 print("Valores nulos por coluna:\n", df.isnull().sum())
@@ -59,6 +69,10 @@ df["idade"] = df["idade"].fillna(mediana_idade)
 media_renda = df["renda"].mean()
 df["renda"] = df["renda"].fillna(media_renda)
 
+# ----------------------------------------------------------------------------
+# PRÓXIMO BLOCO DE CÓDIGO DO CAPÍTULO
+# ----------------------------------------------------------------------------
+
 # Calculando a média de renda e taxa de inadimplência por cidade
 resumo_cidade = df.groupby("cidade").agg(
     renda_media=("renda", "mean"),
@@ -68,6 +82,10 @@ resumo_cidade = df.groupby("cidade").agg(
 
 print("--- Resumo Analítico por Cidade ---")
 print(resumo_cidade)
+
+# ----------------------------------------------------------------------------
+# PRÓXIMO BLOCO DE CÓDIGO DO CAPÍTULO
+# ----------------------------------------------------------------------------
 
 # Criando uma coluna de Faixa Etária
 df["faixa_etaria"] = df["idade"].apply(lambda x: "Jovem (<30)" if x < 30 else "Adulto (30+)")

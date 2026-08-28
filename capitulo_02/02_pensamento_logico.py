@@ -7,9 +7,7 @@
 # Execute este arquivo localmente no VS Code ou copie para o Google Colab.
 # ==============================================================================
 
-# ----------------------------------------------------------------------------
-# PRÓXIMO BLOCO DE CÓDIGO DO CAPÍTULO
-# ----------------------------------------------------------------------------# Lista com o faturamento dos últimos 5 dias
+# Lista com o faturamento dos últimos 5 dias
 faturamento_diario = [1250.0, 1800.50, 950.0, 2100.0, 1600.0]
 
 # Adicionando um novo dia à lista
@@ -18,6 +16,10 @@ faturamento_diario.append(2300.0)
 print("Quantidade de dias registrados:", len(faturamento_diario))
 print("Maior faturamento:", max(faturamento_diario))
 print("Média diária: R$", sum(faturamento_diario) / len(faturamento_diario))
+
+# ----------------------------------------------------------------------------
+# PRÓXIMO BLOCO DE CÓDIGO DO CAPÍTULO
+# ----------------------------------------------------------------------------
 
 # Registro cadastral de um cliente
 cliente = {
@@ -33,10 +35,18 @@ cliente = {
 print(f"Cliente: {cliente['nome']} | Score: {cliente['score_credito']}")
 cliente["score_credito"] += 15  # Aumentando o score
 
+# ----------------------------------------------------------------------------
+# PRÓXIMO BLOCO DE CÓDIGO DO CAPÍTULO
+# ----------------------------------------------------------------------------
+
 # Removendo duplicatas com set
 categorias_brutas = ["Eletrônicos", "Moda", "Moda", "Alimentos", "Eletrônicos"]
 categorias_unicas = set(categorias_brutas)
 print("Categorias Únicas:", categorias_unicas)  # {'Moda', 'Eletrônicos', 'Alimentos'}
+
+# ----------------------------------------------------------------------------
+# PRÓXIMO BLOCO DE CÓDIGO DO CAPÍTULO
+# ----------------------------------------------------------------------------
 
 score = 720
 renda = 4500.0
@@ -50,6 +60,10 @@ else:
 
 print(f"Decisão do Sistema: {status_credito}")
 
+# ----------------------------------------------------------------------------
+# PRÓXIMO BLOCO DE CÓDIGO DO CAPÍTULO
+# ----------------------------------------------------------------------------
+
 # Aplicando um reajuste de 10% em uma lista de preços
 precos_antigos = [100.0, 250.0, 400.0, 80.0]
 
@@ -62,6 +76,10 @@ for preco in precos_antigos:
 precos_novos_direto = [round(p * 1.10, 2) for p in precos_antigos]
 
 print("Preços Reajustados:", precos_novos_direto)
+
+# ----------------------------------------------------------------------------
+# PRÓXIMO BLOCO DE CÓDIGO DO CAPÍTULO
+# ----------------------------------------------------------------------------
 
 def calcular_indice_massa_corporal(peso_kg: float, altura_m: float) -> dict:
     """Calcula o IMC e retorna o valor e a classificação clínica."""

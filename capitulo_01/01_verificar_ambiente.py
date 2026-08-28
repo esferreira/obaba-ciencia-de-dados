@@ -7,39 +7,37 @@
 # Execute este arquivo localmente no VS Code ou copie para o Google Colab.
 # ==============================================================================
 
-# ----------------------------------------------------------------------------
-# PRÓXIMO BLOCO DE CÓDIGO DO CAPÍTULO
-# ----------------------------------------------------------------------------import sys
+import sys
 import platform
 
 print("=" * 60)
-print(" 🔬 VERIFICAÇÃO DO AMBIENTE DE CIÊNCIA DE DADOS")
+print(" VERIFICACAO DO AMBIENTE DE CIENCIA DE DADOS")
 print("=" * 60)
 
 # 1. Informações do Sistema e Interpretador Python
-print(f"🐍 Versão do Python:       {sys.version.split()[0]}")
-print(f"💻 Sistema Operacional:    {platform.system()} {platform.release()} ({platform.architecture()[0]})")
+print(f"[+] Versao do Python:       {sys.version.split()[0]}")
+print(f"[+] Sistema Operacional:    {platform.system()} {platform.release()} ({platform.architecture()[0]})")
 print("-" * 60)
 
 # 2. Testando Bibliotecas e Aceleração de Hardware (GPU / CUDA)
 try:
     import torch
-    print(f"📦 PyTorch Instalado:      v{torch.__version__}")
+    print(f"[+] PyTorch Instalado:      v{torch.__version__}")
     
     tem_gpu = torch.cuda.is_available()
     if tem_gpu:
         nome_gpu = torch.cuda.get_device_name(0)
         qtd_gpus = torch.cuda.device_count()
-        print(f"🔥 Aceleração por GPU:     ATIVA ({qtd_gpus} dispositivo(s) detectado(s))")
-        print(f"🚀 Placa de Vídeo:         {nome_gpu}")
+        print(f"[!] Aceleracao por GPU:     ATIVA ({qtd_gpus} dispositivo(s) detectado(s))")
+        print(f"[!] Placa de Video:         {nome_gpu}")
     else:
-        print("💡 Aceleração por GPU:     Não detectada (Modo CPU ativo)")
-        print("   -> Tudo pronto! A CPU é ideal para todos os fundamentos do livro.")
+        print("[*] Aceleracao por GPU:     Nao detectada (Modo CPU ativo)")
+        print("    -> Tudo pronto! A CPU e ideal para todos os fundamentos do livro.")
         
 except ImportError:
-    print("⚠️  PyTorch não encontrado neste ambiente.")
-    print("   Para instalar no seu computador local, execute: pip install torch")
+    print("[!] PyTorch nao encontrado neste ambiente.")
+    print("    Para instalar no seu computador local, execute: pip install torch")
 
 print("=" * 60)
-print("✅ Teste de ambiente concluído com sucesso!")
+print("[OK] Teste de ambiente concluido com sucesso!")
 print("=" * 60)
