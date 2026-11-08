@@ -1,0 +1,6 @@
+# Dependências exclusivas para o Capítulo 15 (AutoML com PyCaret)
+# O PyCaret requer Python 3.10 ou 3.11 (ou Google Colab).
+# Em Python 3.12+, o script 15_automl_pycaret.py utiliza automaticamente
+# o fallback nativo com Scikit-Learn sem exigir instalação do PyCaret.
+pycaret==3.3.2
+

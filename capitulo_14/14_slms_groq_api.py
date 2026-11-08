@@ -1,57 +1,65 @@
-# ==============================================================================
-# LIVRO: O B-A-BA da Ciência de Dados
-# Capítulo 14: Modelos de Linguagem na Prática via API Groq
+# Capítulo 14 — Triagem com SLMs e Inferência Rápida via Groq
 # Arquivo: 14_slms_groq_api.py
-# ==============================================================================
-# Repositório Oficial de Códigos do Livro
-# Execute este arquivo localmente no VS Code ou copie para o Google Colab.
-# ==============================================================================
 
 import os
 import json
-from groq import Groq
 
-# 1. Configurando a Chave de API do Groq (Obtida gratuitamente em console.groq.com)
-# Em produção, use sempre variáveis de ambiente: os.environ["GROQ_API_KEY"]
-CHAVE_API = os.environ.get("GROQ_API_KEY", "SUA_CHAVE_AQUI")
+# 1. Modelo SLM padrão (8 bilhões de parâmetros).
+# O catálogo da Groq evolui continuamente (console.groq.com/docs/models)
+# e modelos maiores (como 70B) podem ser usados trocando esta constante.
+MODELO_SLM = "llama-3.1-8b-instant"
 
-# 2. Inicializando o Cliente Groq
-cliente = Groq(api_key=CHAVE_API)
+# 2. Lendo a chave de API do ambiente (console.groq.com)
+CHAVE_API = os.environ.get("GROQ_API_KEY")
 
-# 3. Texto real de um cliente de e-commerce
-relato_cliente = """
-Comprei um notebook gamer no dia 10/02 pelo pedido #84920. O produto chegou com a tela trincada 
-e o carregador faltando na caixa. Tentei contato pelo chat e ninguém me respondeu há 3 dias. 
-Estou extremamente frustrado e quero o estorno imediato no meu cartão de crédito!
-"""
+# 3. Relato real de um cliente de comércio eletrônico
+relato_cliente = (
+    "Comprei um notebook gamer no dia 10/02 pelo pedido #84920. "
+    "O produto chegou com a tela trincada e sem o carregador. "
+    "Tentei contato no chat há 3 dias sem resposta. "
+    "Quero o estorno imediato no meu cartão de crédito!"
+)
 
-# 4. Construindo o Prompt do Cientista de Dados (Instruindo a IA a agir como analista)
-prompt_sistema = """
-Você é um assistente sênior de Ciência de Dados especializado em triagem de atendimento ao cliente.
-Analise o relato do cliente e responda ESTRITAMENTE em formato JSON com as seguintes chaves:
-- "sentimento": "Positivo", "Neutro" ou "Negativo"
-- "categoria": "Logística", "Defeito de Produto", "Financeiro" ou "Suporte"
-- "urgencia": "Baixa", "Média" ou "Crítica"
-- "resumo_acao": Uma frase curta com a recomendação imediata para a equipe humana.
-"""
+# 4. Prompt do sistema exigindo saída estrita em formato JSON
+prompt_sistema = (
+    "Você é um analista sênior de Ciência de Dados em atendimento. "
+    "Analise o relato e responda ESTRITAMENTE em formato JSON com: "
+    "'sentimento' ('Positivo', 'Neutro' ou 'Negativo'), "
+    "'categoria' ('Logística', 'Defeito de Produto' ou 'Suporte'), "
+    "'urgencia' ('Baixa', 'Média' ou 'Crítica') e "
+    "'resumo_acao' (recomendação curta para a equipe humana)."
+)
 
-# 5. Executando a Inferência Ultra-Rápida com Llama 3.3 70B no Groq
-try:
+# Resposta de demonstração usada apenas no modo de simulação offline
+RESPOSTA_SIMULADA = {
+    "sentimento": "Negativo",
+    "categoria": "Defeito de Produto",
+    "urgencia": "Crítica",
+    "resumo_acao": (
+        "Autorizar estorno imediato e agendar coleta do item avariado."
+    )
+}
+
+# 5. Executando a inferência real na LPU ou simulação offline explícita
+if not CHAVE_API:
+    print(
+    "[AVISO] GROQ_API_KEY ausente: exibindo resposta SIMULADA offline."
+    )
+    print(json.dumps(RESPOSTA_SIMULADA, indent=4, ensure_ascii=False))
+else:
+    from groq import Groq
+
+    cliente = Groq(api_key=CHAVE_API)
     resposta = cliente.chat.completions.create(
-        model="llama-3.3-70b-versatile",
+        model=MODELO_SLM,
         messages=[
             {"role": "system", "content": prompt_sistema},
             {"role": "user", "content": relato_cliente}
         ],
-        temperature=0.1,  # Temperatura baixa para respostas determinísticas e precisas
-        response_format={"type": "json_object"}  # Força o retorno em JSON estruturado
+        temperature=0.1,
+        response_format={"type": "json_object"}
     )
-    
-    # 6. Exibindo o Resultado Analítico Estruturado
-    resultado_json = json.loads(resposta.choices[0].message.content)
-    print("=== TRIAGEM AUTOMATIZADA COM IA / GROQ ===")
+    conteudo = resposta.choices[0].message.content
+    resultado_json = json.loads(conteudo)
+    print(f"=== TRIAGEM COM GROQ ({MODELO_SLM}) ===")
     print(json.dumps(resultado_json, indent=4, ensure_ascii=False))
-    
-except Exception as e:
-    print("Para executar a chamada real, configure sua chave gratuita em console.groq.com!")
-    print(f"Exemplo de Retorno Simulado:\n{{'sentimento': 'Negativo', 'categoria': 'Defeito de Produto', 'urgencia': 'Crítica', 'resumo_acao': 'Autorizar estorno imediato e solicitar recolhimento do item avariado.'}}")
